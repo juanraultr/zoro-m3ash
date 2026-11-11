@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020"><title>ZORO M3ASH</title>
+<style>
+:root{--bg:#090e1b;--panel:#111a2d;--panel2:#17233a;--gold:#f4c66a;--muted:#91a0b8;--white:#f7f8fc;--green:#48d6a0;--red:#ff7185}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#263653 0%,#10182a 42%,var(--bg) 78%);color:var(--white);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;display:flex;justify-content:center;padding:22px 14px 40px}
+.wrap{width:min(100%,560px)}.brand{text-align:center;margin:16px 0 26px}.brand h1{font-size:27px;letter-spacing:3px;margin:0;color:var(--gold);font-weight:900}.brand p{margin:7px 0 0;color:var(--muted);font-size:13px}
+.card{background:linear-gradient(160deg,rgba(24,36,59,.96),rgba(13,21,37,.98));border:1px solid #2b3a56;border-radius:23px;padding:22px;box-shadow:0 20px 60px #0006}
+.login{max-width:390px;margin:60px auto}.login h2{text-align:center;margin:4px 0 8px}.sub{text-align:center;color:var(--muted);font-size:13px;margin:0 0 22px}
+input,button{font:inherit}input{width:100%;background:#0b1425;border:1px solid #34435f;color:var(--white);border-radius:13px;padding:14px 15px;outline:none}input:focus{border-color:var(--gold)}button{border:0;border-radius:13px;padding:13px 16px;font-weight:800;cursor:pointer;transition:.15s}button:active{transform:scale(.98)}.primary{background:linear-gradient(135deg,#f8d88d,#e9ae46);color:#1c2230;width:100%;margin-top:12px}.secondary{background:#24334e;color:#e8eef9}.danger{background:#492635;color:#ffb5c0}.error{color:#ff8798;text-align:center;min-height:20px;font-size:13px;margin-top:9px}
+.topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.pill{font-size:12px;color:var(--green);background:#163a35;padding:7px 11px;border-radius:99px}.salary-label{color:var(--muted);font-size:13px}.salary-value{font-weight:800;color:var(--gold);font-size:16px}
+.counter{text-align:center;padding:25px 8px 21px;border-radius:19px;background:radial-gradient(ellipse at center,#1d304b 0%,#101b30 68%);border:1px solid #30415e}.counter .caption{color:#aab8ce;font-size:13px}.amount{font-size:clamp(37px,10vw,57px);font-weight:900;letter-spacing:-1.5px;color:var(--gold);direction:ltr;unicode-bidi:isolate;margin:13px 0 8px;font-variant-numeric:tabular-nums;white-space:nowrap}.currency{font-size:15px;color:#d4deed}.progress{height:8px;background:#263650;border-radius:20px;overflow:hidden;margin:19px 0 8px}.bar{height:100%;width:0;background:linear-gradient(90deg,#d99e3e,#ffe19a);border-radius:20px;transition:width .5s}.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;direction:ltr}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:15px 0}.stat{background:#0e192c;border:1px solid #263650;border-radius:15px;padding:14px}.stat small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}.stat strong{font-size:18px;color:#f4f6fb;direction:ltr;display:block;text-align:right;font-variant-numeric:tabular-nums}.stat .green{color:var(--green)}
+.section{margin-top:20px}.section h3{font-size:15px;margin:0 0 11px}.row{display:flex;gap:9px}.row input{min-width:0}.row button{white-space:nowrap}.wide{width:100%}.hint{color:var(--muted);font-size:11px;line-height:1.7;margin:9px 2px 0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:19px}.actions button{min-height:48px}.history{max-height:150px;overflow:auto;margin-top:10px}.history-item{display:flex;justify-content:space-between;gap:10px;padding:9px 2px;border-bottom:1px solid #263650;font-size:12px;color:#c6d1e2}.history-item b{color:#ff9aaa;direction:ltr}.footer{text-align:center;color:#687994;font-size:11px;margin:18px 0 0}
+@media(max-width:390px){.card{padding:17px}.amount{font-size:36px}.row{flex-wrap:wrap}.row button{width:100%}}
+</style></head><body><main class="wrap">
+<header class="brand"><h1>ZORO M3ASH</h1><p>عداد معاشك — كل ثانية إلها حساب</p></header>
+<section id="app" class="card">
+<div class="topline"><div><div class="salary-label">المعاش الشهري</div><div class="salary-value" id="salaryLabel">45,000 ل.ت</div></div><span class="pill">● العداد يعمل</span></div>
+<div class="counter"><div class="caption">المبلغ المتراكم حتى هذه اللحظة</div><div class="amount" id="amount">0.00</div><div class="currency">ليرة تركية</div><div class="progress"><div class="bar" id="bar"></div></div><div class="progress-meta"><span id="elapsed">0 يوم</span><span>30 يوم</span></div></div>
+<div class="stats"><div class="stat"><small>المتبقي من المعاش</small><strong id="remaining">45,000.00</strong></div><div class="stat"><small>إجمالي ما سحبته</small><strong class="green" id="withdrawn">0.00</strong></div></div>
+<div class="section"><h3>سحب من المعاش</h3><div class="row"><input id="withdrawInput" type="number" min="0.01" step="0.01" placeholder="المبلغ بالليرة"><button class="secondary" id="withdrawBtn">تأكيد السحب</button></div><p class="hint" id="withdrawHint">السحب ينخصم من المبلغ المتراكم، وبيظهر مجموع سحوباتك هون.</p></div>
+<div class="section"><h3>تغيير المعاش الشهري</h3><div class="row"><input id="salaryInput" type="number" min="1" step="0.01" placeholder="المعاش الجديد"><button class="secondary" id="salaryBtn">حفظ التغيير</button></div><p class="hint">تغيير المعاش بيحافظ على المبلغ المتراكم حالياً، وبيعدّل الزيادة لباقي مدة الشهر.</p></div>
+<div class="actions"><button class="primary" id="receivedBtn">استلمت معاشي</button></div>
+<div class="section"><h3>آخر السحوبات</h3><div id="history" class="history"><div class="hint">ما في سحوبات لحد الآن.</div></div></div>
+</section><div class="footer">ZORO M3ASH · دورة المعاش 30 يوم</div></main>
+<script>
+(()=>{
+const CYCLE=30*24*60*60*1000, KEY='zoro_m3ash_v1';
+const $=id=>document.getElementById(id);let state;
+const fmt=n=>Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+function fresh(){return {salary:45000,start:Date.now(),baseEarned:0,baseTime:0,withdrawals:[],cycleWithdrawn:0}}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));return x&&x.salary>0?x:fresh()}catch{return fresh()}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){/* يعمل العداد حتى لو منع المتصفح التخزين */}}
+function earned(now=Date.now()){
+ const elapsed=Math.max(0,now-state.start), end=Math.min(elapsed,CYCLE);
+ const startEarned=Number(state.baseEarned||0), remaining=Math.max(0,state.salary-startEarned);
+ const remainingTime=Math.max(1,CYCLE-Number(state.baseTime||0));
+ if(elapsed<=Number(state.baseTime||0))return startEarned;
+ return Math.min(state.salary,startEarned+remaining*Math.min(1,(elapsed-Number(state.baseTime||0))/remainingTime));
+}
+function render(){if(!state)return;const e=earned(),w=Number(state.cycleWithdrawn||0),bal=Math.max(0,e-w),pct=Math.min(100,Math.max(0,(Date.now()-state.start)/CYCLE*100));
+ $('salaryLabel').textContent=fmt(state.salary)+' ل.ت';$('amount').textContent=fmt(e);$('remaining').textContent=fmt(bal);$('withdrawn').textContent=fmt(w);$('bar').style.width=pct+'%';
+ const days=Math.floor(Math.min(CYCLE,Date.now()-state.start)/86400000);$('elapsed').textContent=days+' يوم';
+ $('history').innerHTML=state.withdrawals.length?state.withdrawals.slice().reverse().slice(0,12).map(x=>`<div class="history-item"><span>${new Date(x.date).toLocaleString('ar')}</span><b>− ${fmt(x.amount)} ل.ت</b></div>`).join(''):'<div class="hint">ما في سحوبات لحد الآن.</div>';
+}
+state=load();render();
+$('withdrawBtn').addEventListener('click',()=>{const amount=Number($('withdrawInput').value),bal=Math.max(0,earned()-Number(state.cycleWithdrawn||0));if(!Number.isFinite(amount)||amount<=0){$('withdrawHint').textContent='اكتب مبلغ صحيح.';return}if(amount>bal){$('withdrawHint').textContent='المبلغ أكبر من الرصيد المتراكم المتاح حالياً.';return}state.cycleWithdrawn=(state.cycleWithdrawn||0)+amount;state.withdrawals.push({amount,date:Date.now()});$('withdrawInput').value='';$('withdrawHint').textContent='تم تسجيل السحب.';save();render()});
+$('salaryBtn').addEventListener('click',()=>{const next=Number($('salaryInput').value);if(!Number.isFinite(next)||next<=0)return;const now=Date.now(),current=earned(now);state.baseEarned=Math.min(current,next);state.baseTime=Math.min(CYCLE,Math.max(0,now-state.start));state.salary=next;state.start=now-state.baseTime;$('salaryInput').value='';save();render()});
+$('receivedBtn').addEventListener('click',()=>{if(!confirm('تأكيد استلام المعاش وبدء عداد جديد؟'))return;state.start=Date.now();state.baseEarned=0;state.baseTime=0;state.cycleWithdrawn=0;state.withdrawals=[];save();render()});
+setInterval(()=>render(),1000);
+})();
+</script></body></html>
