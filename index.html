@@ -11,7 +11,7 @@
 .login{max-width:390px;margin:60px auto}.login h2{text-align:center;margin:4px 0 8px}.sub{text-align:center;color:var(--muted);font-size:13px;margin:0 0 22px}
 input,button{font:inherit}input{width:100%;background:#0b1425;border:1px solid #34435f;color:var(--white);border-radius:13px;padding:14px 15px;outline:none}input:focus{border-color:var(--gold)}button{border:0;border-radius:13px;padding:13px 16px;font-weight:800;cursor:pointer;transition:.15s}button:active{transform:scale(.98)}.primary{background:linear-gradient(135deg,#f8d88d,#e9ae46);color:#1c2230;width:100%;margin-top:12px}.secondary{background:#24334e;color:#e8eef9}.danger{background:#492635;color:#ffb5c0}.error{color:#ff8798;text-align:center;min-height:20px;font-size:13px;margin-top:9px}
 .topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.pill{font-size:12px;color:var(--green);background:#163a35;padding:7px 11px;border-radius:99px}.salary-label{color:var(--muted);font-size:13px}.salary-value{font-weight:800;color:var(--gold);font-size:16px}
-.counter{text-align:center;padding:25px 8px 21px;border-radius:19px;background:radial-gradient(ellipse at center,#1d304b 0%,#101b30 68%);border:1px solid #30415e}.counter .caption{color:#aab8ce;font-size:13px;line-height:1.6}.amount{font-size:clamp(37px,10vw,57px);font-weight:900;letter-spacing:-1.5px;color:var(--gold);direction:ltr;unicode-bidi:isolate;margin:13px 0 8px;font-variant-numeric:tabular-nums;white-space:nowrap}.currency{font-size:15px;color:#d4deed}.progress{height:8px;background:#263650;border-radius:20px;overflow:hidden;margin:19px 0 8px}.bar{height:100%;width:0;background:linear-gradient(90deg,#d99e3e,#ffe19a);border-radius:20px;transition:width .5s}.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;direction:ltr}
+.counter{text-align:center;padding:25px 8px 21px;border-radius:19px;background:radial-gradient(ellipse at center,#1d304b 0%,#101b30 68%);border:1px solid #30415e}.counter .caption{color:#aab8ce;font-size:13px;line-height:1.6}.amount{font-size:clamp(37px,10vw,57px);font-weight:900;letter-spacing:-1.5px;color:var(--gold);direction:ltr;unicode-bidi:isolate;margin:13px 0 8px;font-variant-numeric:tabular-nums;white-space:nowrap}.amount.negative{color:#ff5368}.stat strong.negative{color:#ff5368}.currency{font-size:15px;color:#d4deed}.progress{height:8px;background:#263650;border-radius:20px;overflow:hidden;margin:19px 0 8px}.bar{height:100%;width:0;background:linear-gradient(90deg,#d99e3e,#ffe19a);border-radius:20px;transition:width .5s}.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;direction:ltr}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:15px 0}.stat{background:#0e192c;border:1px solid #263650;border-radius:15px;padding:14px}.stat small{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}.stat strong{font-size:18px;color:#f4f6fb;direction:ltr;display:block;text-align:right;font-variant-numeric:tabular-nums}.stat .green{color:var(--green)}
 .section{margin-top:20px}.section h3{font-size:15px;margin:0 0 11px}.row{display:flex;gap:9px}.row input{min-width:0}.row button{white-space:nowrap}.wide{width:100%}.hint{color:var(--muted);font-size:11px;line-height:1.7;margin:9px 2px 0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:19px}.actions button{min-height:48px}.history{max-height:150px;overflow:auto;margin-top:10px}.history-item{display:flex;justify-content:space-between;gap:10px;padding:9px 2px;border-bottom:1px solid #263650;font-size:12px;color:#c6d1e2}.history-item b{color:#ff9aaa;direction:ltr}.footer{text-align:center;color:#687994;font-size:11px;margin:18px 0 0}
 @media(max-width:390px){.card{padding:17px}.amount{font-size:36px}.row{flex-wrap:wrap}.row button{width:100%}}
@@ -27,9 +27,10 @@ input,button{font:inherit}input{width:100%;background:#0b1425;border:1px solid #
 <div class="counter"><div class="caption" id="dateLabel">التاريخ</div><div class="caption" style="margin-top:8px">صافي المعاش المتراكم حتى هذه اللحظة</div><div class="amount" id="amount">0.00</div><div class="currency">ليرة تركية</div><div class="progress"><div class="bar" id="bar"></div></div><div class="progress-meta"><span id="elapsed">0 يوم</span><span>30 يوم</span></div></div>
 <div class="stats"><div class="stat"><small>المتبقي من المعاش</small><strong id="remaining">45,000.00</strong></div><div class="stat"><small>إجمالي ما سحبته</small><strong class="green" id="withdrawn">0.00</strong></div></div>
 <div class="section"><h3>سحب من المعاش</h3><div class="row"><input id="withdrawInput" type="number" min="0.01" step="0.01" placeholder="المبلغ بالليرة"><button class="secondary" id="withdrawBtn">تأكيد السحب</button></div><p class="hint" id="withdrawHint">السحب ينخصم من المبلغ المتراكم، وبيظهر مجموع سحوباتك هون.</p></div>
-<div class="section"><h3>تغيير المعاش الشهري</h3><div class="row"><input id="salaryInput" type="number" min="1" step="0.01" placeholder="المعاش الجديد"><button class="secondary" id="salaryBtn">حفظ التغيير</button></div><p class="hint">تغيير المعاش بيحافظ على المبلغ المتراكم حالياً، وبيعدّل الزيادة لباقي مدة الشهر.</p></div>
+<div class="section"><h3>تغيير المعاش الشهري</h3><div class="row"><input id="salaryInput" type="number" min="1" step="0.01" placeholder="المعاش الجديد"><button class="secondary" id="salaryBtn">حفظ التغيير</button></div><p class="hint">تغيير المعاش بيحافظ على المبلغ المتراكم حالياً، وبيعدّل الزيادة لباقي مدة الـ30 يوم.</p></div>
+<div class="section"><h3>تاريخ استلام المعاش</h3><div class="row"><input id="startDateInput" type="date"><button class="secondary" id="dateBtn">حفظ التاريخ</button></div><p class="hint">اختار اليوم اللي استلمت فيه معاشك. العداد بيحسب من بداية هداك اليوم ولمدة 30 يوم.</p><div class="error" id="dateHint"></div></div>
 <div class="actions"><button class="primary" id="receivedBtn">استلمت معاشي</button></div>
-<div class="section"><h3>آخر السحوبات</h3><div id="history" class="history"><div class="hint">ما في سحوبات لحد الآن.</div></div></div>
+<div class="section"><h3>سجل السحوبات <span id="historyCount" class="salary-label">(0)</span></h3><div id="history" class="history"><div class="hint">ما في سحوبات لحد الآن.</div></div></div>
 </section><div class="footer">ZORO M3ASH · دورة المعاش 30 يوم</div></main>
 <script>
 (()=>{
@@ -44,11 +45,10 @@ function load(){
   let x=JSON.parse(localStorage.getItem(KEY)||'null');
   if(!x){const old=JSON.parse(localStorage.getItem(OLD_KEY)||'null');if(old&&old.salary>0){const f=fresh();x={...f,salary:Number(old.salary),withdrawals:Array.isArray(old.withdrawals)?old.withdrawals:[],cycleWithdrawn:Number(old.cycleWithdrawn||0)};}}
   if(!x||!x.salary||x.salary<=0)x=fresh();
-  const now=new Date();
-  if(x.mode!=='cycle'){
-   x.mode='calendar';
-   if(x.periodKey!==monthKey(now)){x.periodKey=monthKey(now);x.start=monthStart(now);x.baseEarned=0;x.baseTime=0;x.withdrawals=[];x.cycleWithdrawn=0;}
-  }
+  if(!Array.isArray(x.withdrawals))x.withdrawals=[];
+  if(!Number.isFinite(Number(x.cycleWithdrawn)))x.cycleWithdrawn=0;
+  if(!x.start)x.start=monthStart(new Date());
+  x.mode='cycle';
   return x;
  }catch{return fresh()}
 }
@@ -68,16 +68,20 @@ function render(){
  $('brandTitle').textContent='ZORO M3ASH';
  $('salaryLabel').textContent=fmt(state.salary)+' ل.ت';
  $('amount').textContent=(net<0?'− ':'')+fmt(Math.abs(net));
+ $('amount').classList.toggle('negative',net<0);
  $('remaining').textContent=(net<0?'− ':'')+fmt(Math.abs(net));
+ $('remaining').classList.toggle('negative',net<0);
  $('withdrawn').textContent=fmt(withdrawn);
  $('bar').style.width=pct+'%';
  const dateText=now.toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});
- const dayInfo=state.mode==='calendar'?`اليوم ${now.getDate()} من الشهر`:`مرّ ${Math.floor(elapsed/86400000)} يوم من دورة معاشك`;
- $('dateLabel').textContent=`${dateText} · ${dayInfo}`;
+ const startText=new Date(state.start).toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});
+ const dayInfo=elapsed<0?'لم يبدأ العداد بعد':`من تاريخ الاستلام ${startText} · مرّ ${Math.floor(Math.min(CYCLE,elapsed)/86400000)} يوم`;
+ $('dateLabel').textContent=`اليوم ${dateText} · ${dayInfo}`;
  $('elapsed').textContent=Math.floor(Math.min(CYCLE,elapsed)/86400000)+' يوم';
- $('history').innerHTML=state.withdrawals.length?state.withdrawals.slice().reverse().slice(0,12).map(x=>`<div class="history-item"><span>${new Date(x.date).toLocaleString('ar')}</span><b>− ${fmt(x.amount)} ل.ت</b></div>`).join(''):'<div class="hint">ما في سحوبات لحد الآن.</div>';
+ $('historyCount').textContent=`(${state.withdrawals.length})`;
+ $('history').innerHTML=state.withdrawals.length?state.withdrawals.slice().reverse().map((x,i)=>`<div class="history-item"><span>#${state.withdrawals.length-i} · ${new Date(x.date).toLocaleString('ar-EG',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})}</span><b>− ${fmt(x.amount)} ل.ت</b></div>`).join(''):'<div class="hint">ما في سحوبات لحد الآن.</div>';
 }
-function showApp(){unlocked=true;$('login').hidden=true;$('app').hidden=false;render()}
+function showApp(){unlocked=true;$('login').hidden=true;$('app').hidden=false;$('startDateInput').value=localDateValue(state.start);render()}
 function tryLogin(){if($('passwordInput').value.trim()===PASSWORD){$('loginError').textContent='';$('passwordInput').value='';showApp()}else{$('loginError').textContent='كلمة السر غير صحيحة';$('passwordInput').value='';}}
 state=load();save();
 $('loginBtn').addEventListener('click',tryLogin);
@@ -96,6 +100,15 @@ $('salaryBtn').addEventListener('click',()=>{
  const now=Date.now(),current=earned(now),elapsed=elapsedMs(now);
  state.baseEarned=Math.min(current,next);state.baseTime=Math.min(CYCLE,elapsed);state.salary=next;
  $('salaryInput').value='';save();render();
+});
+$('dateBtn').addEventListener('click',()=>{
+ const value=$('startDateInput').value;
+ if(!value){$('dateHint').textContent='اختار تاريخ صحيح.';return}
+ const selected=new Date(value+'T00:00:00').getTime();
+ if(!Number.isFinite(selected)){$('dateHint').textContent='التاريخ غير صحيح.';return}
+ state.start=selected;state.baseEarned=0;state.baseTime=0;state.mode='cycle';
+ $('dateHint').textContent='تم تحديث تاريخ بداية المعاش.';
+ save();render();
 });
 $('receivedBtn').addEventListener('click',()=>{
  if(!confirm('تأكيد استلام المعاش وبدء عداد جديد؟'))return;
