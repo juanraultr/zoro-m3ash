@@ -25,7 +25,7 @@ input,button{font:inherit}input{width:100%;background:#0b1425;border:1px solid #
 <section id="app" class="card" hidden>
 <div class="topline"><div><div class="salary-label">المعاش الشهري</div><div class="salary-value" id="salaryLabel">45,000 ل.ت</div></div><span class="pill">● العداد يعمل</span></div>
 <div class="counter"><div class="caption" id="dateLabel">التاريخ</div><div class="caption" style="margin-top:8px">صافي المعاش المتراكم حتى هذه اللحظة</div><div class="amount" id="amount">0.00</div><div class="currency">ليرة تركية</div><div class="progress"><div class="bar" id="bar"></div></div><div class="progress-meta"><span id="elapsed">0 يوم</span><span>30 يوم</span></div></div>
-<div class="stats"><div class="stat"><small>المتبقي من المعاش</small><strong id="remaining">45,000.00</strong></div><div class="stat"><small>إجمالي ما سحبته</small><strong class="green" id="withdrawn">0.00</strong></div></div>
+<div class="stats"><div class="stat"><small>المبلغ المتوقع استلامه آخر الشهر</small><strong id="remaining">45,000.00</strong></div><div class="stat"><small>إجمالي ما سحبته</small><strong class="green" id="withdrawn">0.00</strong></div></div>
 <div class="section"><h3>سحب من المعاش</h3><div class="row"><input id="withdrawInput" type="number" min="0.01" step="0.01" placeholder="المبلغ بالليرة"><button class="secondary" id="withdrawBtn">تأكيد السحب</button></div><p class="hint" id="withdrawHint">السحب ينخصم من المبلغ المتراكم، وبيظهر مجموع سحوباتك هون.</p></div>
 <div class="section"><h3>تغيير المعاش الشهري</h3><div class="row"><input id="salaryInput" type="number" min="1" step="0.01" placeholder="المعاش الجديد"><button class="secondary" id="salaryBtn">حفظ التغيير</button></div><p class="hint">تغيير المعاش بيحافظ على المبلغ المتراكم حالياً، وبيعدّل الزيادة لباقي مدة الـ30 يوم.</p></div>
 <div class="section"><h3>تاريخ استلام المعاش</h3><div class="row"><input id="startDateInput" type="date"><button class="secondary" id="dateBtn">حفظ التاريخ</button></div><p class="hint">اختار اليوم اللي استلمت فيه معاشك. العداد بيحسب من بداية هداك اليوم ولمدة 30 يوم.</p><div class="error" id="dateHint"></div></div>
@@ -69,8 +69,9 @@ function render(){
  $('salaryLabel').textContent=fmt(state.salary)+' ل.ت';
  $('amount').textContent=(net<0?'− ':'')+fmt(Math.abs(net));
  $('amount').classList.toggle('negative',net<0);
- $('remaining').textContent=(net<0?'− ':'')+fmt(Math.abs(net));
- $('remaining').classList.toggle('negative',net<0);
+ const expectedAtMonthEnd=Number(state.salary)-withdrawn;
+ $('remaining').textContent=(expectedAtMonthEnd<0?'− ':'')+fmt(Math.abs(expectedAtMonthEnd));
+ $('remaining').classList.toggle('negative',expectedAtMonthEnd<0);
  $('withdrawn').textContent=fmt(withdrawn);
  $('bar').style.width=pct+'%';
  const dateText=now.toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});
